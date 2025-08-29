@@ -196,32 +196,43 @@ class DatabaseService {
       console.log('Action data received:', actionData);
       
       // Lấy thông tin sách để có price, category_id, brand
-      const bookResult = await this.getBookById(actionData.bookId);
-      console.log('Book result:', bookResult);
+      let book = null;
       
-      if (!bookResult.success) {
-        console.error('Book not found for ID:', actionData.bookId);
-        throw new Error('Book not found');
+      // Thử lấy từ database trước
+      const bookResult = await this.getBookById(actionData.bookId);
+      console.log('Book result from database:', bookResult);
+      
+      if (bookResult.success) {
+        book = bookResult.book;
+        console.log('Book data from database:', book);
+        console.log('Database book category_id:', book.category_id);
       }
       
-      const book = bookResult.book;
-      console.log('Book data:', book);
+      // Nếu database không có category_id, fallback về local data
+      if (!book || book.category_id === null || book.category_id === undefined) {
+        console.log('Database book missing category_id, falling back to local data...');
+        const { books } = await import('../data/books.js');
+        const localBook = books.find(b => b.id === actionData.bookId);
+        
+        if (localBook) {
+          console.log('Found book in local data with category_id:', localBook);
+          book = localBook;
+        } else {
+          throw new Error('Book not found in database or local data');
+        }
+      }
       
       // Chuẩn bị data để insert - chỉ sử dụng các cột có trong schema
       const actionDataToInsert = {
         event_type: actionData.actionType,
         product_id: actionData.bookId,
-        category_id: book.category_id || null,
+        category_id: book.category_id, // Bây giờ chắc chắn có giá trị
         price: book.price || 0,
         user_id: actionData.userId,
         user_session: actionData.sessionId,
         user_agent: navigator.userAgent,
         ip_address: null // Sẽ được set từ server
       };
-      
-      // Chỉ thêm các cột nếu tồn tại trong schema
-      // category_code: book.category || 'unknown',
-      // brand: book.brand || 'nxb_dai_hoc_su_pham',
       
       console.log('Data to insert:', actionDataToInsert);
       console.log('Table name:', TABLES.USER_ACTIONS);
