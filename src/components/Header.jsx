@@ -26,9 +26,7 @@ const Header = () => {
             <Link to="/books" className="text-gray-700 hover:text-blue-600 transition-colors">
               Danh sách sách
             </Link>
-            <Link to="/stats" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Thống kê
-            </Link>
+
             <Link to="/about" className="text-gray-700 hover:text-blue-600 transition-colors">
               Giới thiệu
             </Link>
@@ -100,13 +98,7 @@ const Header = () => {
               >
                 Danh sách sách
               </Link>
-              <Link
-                to="/stats"
-                className="block px-3 py-2 text-gray-700 hover:text-blue-600"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Thống kê
-              </Link>
+
               <Link
                 to="/about"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600"

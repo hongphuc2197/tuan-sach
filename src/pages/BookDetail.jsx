@@ -4,12 +4,14 @@ import { ArrowLeft, ShoppingCart, Eye, Heart, Star } from 'lucide-react';
 import { books } from '../data/books';
 import { useUserActions } from '../hooks/useUserActions.js';
 import { useAuth } from '../hooks/useAuth.jsx';
+import PurchaseSuccessPopup from '../components/PurchaseSuccessPopup.jsx';
 
 const BookDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [book, setBook] = useState(null);
   const [isLiked, setIsLiked] = useState(false);
+  const [showPurchasePopup, setShowPurchasePopup] = useState(false);
   const { user, isAuthenticated } = useAuth();
   const { actions: userActions, markAsViewed, markAsPurchased } = useUserActions(book?.id);
 
@@ -40,16 +42,45 @@ const BookDetail = () => {
     }
   }, [book, markAsViewed, isAuthenticated, user]);
 
+  // Scroll to top khi vào trang chi tiết sách
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
   const handlePurchase = () => {
+    console.log('=== HANDLE PURCHASE START ===');
+    console.log('Purchase button clicked for book:', book?.title);
+    console.log('Book ID:', book?.id);
+    console.log('User authenticated:', isAuthenticated);
+    console.log('Current user:', user);
+    console.log('User actions state:', userActions);
+    
     if (book) {
       try {
+        console.log('Calling markAsPurchased...');
         markAsPurchased();
-        alert(`Cảm ơn bạn đã mua sách "${book.title}"!`);
+        console.log('markAsPurchased called successfully');
+        
+        // Thêm feedback trực quan
+        const button = document.querySelector('[data-purchase-button]');
+        if (button) {
+          button.classList.add('bg-green-700');
+          setTimeout(() => {
+            button.classList.remove('bg-green-700');
+          }, 200);
+        }
+        
+        // Hiển thị popup thành công thay vì alert
+        setShowPurchasePopup(true);
+        console.log('Purchase completed successfully');
       } catch (error) {
         console.error('Error calling markAsPurchased:', error);
         alert(`Cảm ơn bạn đã mua sách "${book.title}"! (Lưu ý: Hành động mua sách không được ghi nhận do lỗi hệ thống)`);
       }
+    } else {
+      console.error('Book is null or undefined');
     }
+    console.log('=== HANDLE PURCHASE END ===');
   };
 
   const handleLike = () => {
@@ -187,12 +218,31 @@ const BookDetail = () => {
                 <div className="flex space-x-4">
                   <button
                     onClick={handlePurchase}
+                    onTouchStart={(e) => {
+                      console.log('Touch start on purchase button');
+                      if (!userActions.purchased) {
+                        e.currentTarget.classList.add('bg-green-700');
+                      }
+                    }}
+                    onTouchEnd={(e) => {
+                      console.log('Touch end on purchase button');
+                      setTimeout(() => {
+                        e.currentTarget.classList.remove('bg-green-700');
+                      }, 200);
+                    }}
                     disabled={userActions.purchased}
-                    className={`flex-1 flex items-center justify-center space-x-2 py-3 px-6 rounded-lg font-semibold transition-colors ${
+                    data-purchase-button
+                    className={`flex-1 flex items-center justify-center space-x-2 py-4 px-6 rounded-lg font-semibold transition-all duration-200 active:scale-95 touch-manipulation ${
                       userActions.purchased
                         ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                        : 'bg-green-600 text-white hover:bg-green-700'
+                        : 'bg-green-600 text-white hover:bg-green-700 active:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2'
                     }`}
+                    style={{
+                      WebkitTapHighlightColor: 'transparent',
+                      WebkitTouchCallout: 'none',
+                      WebkitUserSelect: 'none',
+                      userSelect: 'none'
+                    }}
                   >
                     <ShoppingCart className="h-5 w-5" />
                     <span>
@@ -235,6 +285,13 @@ const BookDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Purchase Success Popup */}
+      <PurchaseSuccessPopup
+        isVisible={showPurchasePopup}
+        onClose={() => setShowPurchasePopup(false)}
+        bookTitle={book?.title || ''}
+      />
     </div>
   );
 };

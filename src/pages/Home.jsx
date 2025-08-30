@@ -2,10 +2,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight, BookOpen, Users, Award, Star } from 'lucide-react';
 import { books } from '../data/books';
 import { useAuth } from '../hooks/useAuth.jsx';
+import { useEffect } from 'react';
 
 const Home = () => {
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth();
   const featuredBooks = books.slice(0, 6);
+
+  // Scroll to top khi vào trang chủ
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -18,21 +25,35 @@ const Home = () => {
           <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
             NXB Đại Học Sư Phạm - Nơi ươm mầm tri thức, phát triển tài năng giáo dục Việt Nam
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/login"
-              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors flex items-center justify-center space-x-2"
-            >
-              <span>Đăng nhập để xem sách</span>
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <Link
-              to="/register"
-              className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-            >
-              Đăng ký tài khoản
-            </Link>
-          </div>
+                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              {isAuthenticated ? (
+                // Nếu đã đăng nhập, hiển thị nút xem sách
+                <Link
+                  to="/books"
+                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors flex items-center justify-center space-x-2"
+                >
+                  <span>Xem danh sách sách</span>
+                  <ArrowRight className="h-5 w-5" />
+                </Link>
+              ) : (
+                // Nếu chưa đăng nhập, hiển thị nút đăng nhập/đăng ký
+                <>
+                  <Link
+                    to="/login"
+                    className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors flex items-center justify-center space-x-2"
+                  >
+                    <span>Đăng nhập để xem sách</span>
+                    <ArrowRight className="h-5 w-5" />
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+                  >
+                    Đăng ký tài khoản
+                  </Link>
+                </>
+              )}
+            </div>
         </div>
       </section>
 

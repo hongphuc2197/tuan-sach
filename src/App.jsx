@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Books from './pages/Books';
 import BookDetail from './pages/BookDetail';
-import UserStats from './pages/UserStats';
+
 import About from './pages/About';
 import Contact from './pages/Contact';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -46,11 +46,7 @@ function App() {
                   <BookDetail />
                 </ProtectedRoute>
               } />
-              <Route path="/stats" element={
-                <ProtectedRoute>
-                  <UserStats />
-                </ProtectedRoute>
-              } />
+              
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>

@@ -44,6 +44,11 @@ const Books = () => {
     loadBooks();
   }, []);
 
+  // Scroll to top khi vào trang danh sách sách
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const filteredBooks = useMemo(() => {
     return books.filter(book => {
       const matchesSearch = book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
