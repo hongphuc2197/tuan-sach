@@ -11,7 +11,13 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    yearBirth: '',
+    education: '',
+    maritalStatus: '',
+    income: '',
+    kidhome: 0,
+    teenhome: 0
   });
   
   const [showPassword, setShowPassword] = useState(false);
@@ -51,6 +57,21 @@ const Register = () => {
       setMessage({ type: 'error', text: 'Mật khẩu xác nhận không khớp' });
       return false;
     }
+
+    if (!formData.yearBirth) {
+      setMessage({ type: 'error', text: 'Vui lòng chọn năm sinh' });
+      return false;
+    }
+
+    if (!formData.education) {
+      setMessage({ type: 'error', text: 'Vui lòng chọn trình độ học vấn' });
+      return false;
+    }
+
+    if (!formData.maritalStatus) {
+      setMessage({ type: 'error', text: 'Vui lòng chọn tình trạng hôn nhân' });
+      return false;
+    }
     
     return true;
   };
@@ -67,7 +88,13 @@ const Register = () => {
       const result = await register({
         name: formData.name.trim(),
         email: formData.email.trim().toLowerCase(),
-        password: formData.password
+        password: formData.password,
+        yearBirth: parseInt(formData.yearBirth),
+        education: formData.education,
+        maritalStatus: formData.maritalStatus,
+        income: formData.income ? parseFloat(formData.income) : null,
+        kidhome: parseInt(formData.kidhome),
+        teenhome: parseInt(formData.teenhome)
       });
       
       if (result.success) {
@@ -92,7 +119,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+      <div className="max-w-lg w-full space-y-8">
         <div className="text-center">
           <div className="mx-auto h-16 w-16 bg-blue-600 rounded-full flex items-center justify-center">
             <UserPlus className="h-8 w-8 text-white" />
@@ -225,6 +252,130 @@ const Register = () => {
                   )}
                 </button>
               </div>
+            </div>
+          </div>
+
+          {/* Thông tin cá nhân */}
+          <div className="border-t border-gray-200 pt-6">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">Thông tin cá nhân</h3>
+            
+            {/* Năm sinh */}
+            <div className="mb-4">
+              <label htmlFor="yearBirth" className="block text-sm font-medium text-gray-700 mb-2">
+                Năm sinh *
+              </label>
+              <select
+                id="yearBirth"
+                name="yearBirth"
+                required
+                value={formData.yearBirth}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              >
+                <option value="">Chọn năm sinh</option>
+                {Array.from({ length: 80 }, (_, i) => new Date().getFullYear() - i).map(year => (
+                  <option key={year} value={year}>{year}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Trình độ học vấn */}
+            <div className="mb-4">
+              <label htmlFor="education" className="block text-sm font-medium text-gray-700 mb-2">
+                Trình độ học vấn *
+              </label>
+              <select
+                id="education"
+                name="education"
+                required
+                value={formData.education}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              >
+                <option value="">Chọn trình độ học vấn</option>
+                <option value="Basic">Phổ thông cơ sở</option>
+                <option value="Graduation">Tốt nghiệp phổ thông</option>
+                <option value="Master">Đại học</option>
+                <option value="PhD">Sau đại học</option>
+                <option value="2n Cycle">Trung cấp/Cao đẳng</option>
+              </select>
+            </div>
+
+            {/* Tình trạng hôn nhân */}
+            <div className="mb-4">
+              <label htmlFor="maritalStatus" className="block text-sm font-medium text-gray-700 mb-2">
+                Tình trạng hôn nhân *
+              </label>
+              <select
+                id="maritalStatus"
+                name="maritalStatus"
+                required
+                value={formData.maritalStatus}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              >
+                <option value="">Chọn tình trạng hôn nhân</option>
+                <option value="Single">Độc thân</option>
+                <option value="Married">Đã kết hôn</option>
+                <option value="Divorced">Đã ly hôn</option>
+                <option value="Widow">Góa</option>
+                <option value="YOLO">Đang hẹn hò</option>
+              </select>
+            </div>
+
+            {/* Thu nhập hàng năm */}
+            <div className="mb-4">
+              <label htmlFor="income" className="block text-sm font-medium text-gray-700 mb-2">
+                Thu nhập hàng năm (VNĐ)
+              </label>
+              <input
+                id="income"
+                name="income"
+                type="number"
+                value={formData.income}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Ví dụ: 50000000"
+                min="0"
+                step="1000000"
+              />
+              <p className="text-xs text-gray-500 mt-1">Để trống nếu không muốn chia sẻ</p>
+            </div>
+
+            {/* Số con nhỏ */}
+            <div className="mb-4">
+              <label htmlFor="kidhome" className="block text-sm font-medium text-gray-700 mb-2">
+                Số con nhỏ (dưới 12 tuổi)
+              </label>
+              <select
+                id="kidhome"
+                name="kidhome"
+                value={formData.kidhome}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              >
+                {Array.from({ length: 6 }, (_, i) => (
+                  <option key={i} value={i}>{i}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Số con vị thành niên */}
+            <div className="mb-4">
+              <label htmlFor="teenhome" className="block text-sm font-medium text-gray-700 mb-2">
+                Số con vị thành niên (12-18 tuổi)
+              </label>
+              <select
+                id="teenhome"
+                name="teenhome"
+                value={formData.teenhome}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              >
+                {Array.from({ length: 6 }, (_, i) => (
+                  <option key={i} value={i}>{i}</option>
+                ))}
+              </select>
             </div>
           </div>
 

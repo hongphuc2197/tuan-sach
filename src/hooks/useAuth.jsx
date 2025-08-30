@@ -42,7 +42,13 @@ export const AuthProvider = ({ children }) => {
       const result = await databaseService.createUser({
         email: userData.email,
         name: userData.name,
-        password: userData.password  // Thêm password vào đây!
+        password: userData.password,
+        yearBirth: userData.yearBirth,
+        education: userData.education,
+        maritalStatus: userData.maritalStatus,
+        income: userData.income,
+        kidhome: userData.kidhome,
+        teenhome: userData.teenhome
       });
 
       if (!result.success) {

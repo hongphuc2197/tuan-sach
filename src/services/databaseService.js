@@ -13,7 +13,13 @@ class DatabaseService {
         .insert([{
           email: userData.email,
           name: userData.name,
-          password_hash: userData.password, // Lưu password vào database
+          password_hash: userData.password,
+          year_birth: userData.yearBirth,
+          education: userData.education,
+          marital_status: userData.maritalStatus,
+          income: userData.income,
+          kidhome: userData.kidhome,
+          teenhome: userData.teenhome,
           created_at: new Date().toISOString(),
           is_active: true
         }])
