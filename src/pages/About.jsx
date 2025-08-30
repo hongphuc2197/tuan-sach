@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
 import { BookOpen, Award, Users, Target, CheckCircle } from 'lucide-react';
 
 const About = () => {
+  // Scroll to top khi vào trang
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const values = [
     {
       icon: BookOpen,
@@ -34,12 +39,12 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
+      <section className="bg-gradient-to-r from-red-600 to-red-700 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Về Chúng Tôi
           </h1>
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-red-100 max-w-3xl mx-auto">
             NXB Đại Học Sư Phạm - Nơi ươm mầm tri thức, phát triển tài năng giáo dục Việt Nam
           </p>
         </div>
@@ -92,8 +97,8 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <div key={index} className="text-center">
-                <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <value.icon className="h-8 w-8 text-blue-600" />
+                <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <value.icon className="h-8 w-8 text-red-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">
                   {value.title}
@@ -121,7 +126,7 @@ const About = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {achievements.map((achievement, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-4xl font-bold text-blue-600 mb-2">
+                  <div className="text-4xl font-bold text-red-600 mb-2">
                     {achievement.number}
                   </div>
                   <div className="text-gray-600">
@@ -146,8 +151,8 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-              <div className="w-24 h-24 bg-blue-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Users className="h-12 w-12 text-blue-600" />
+              <div className="w-24 h-24 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <Users className="h-12 w-12 text-red-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Biên Tập Viên
@@ -158,8 +163,8 @@ const About = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-              <div className="w-24 h-24 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <BookOpen className="h-12 w-12 text-green-600" />
+              <div className="w-24 h-24 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <BookOpen className="h-12 w-12 text-red-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Tác Giả
@@ -170,8 +175,8 @@ const About = () => {
             </div>
 
             <div className="bg-white rounded-lg shadow-lg p-6 text-center">
-              <div className="w-24 h-24 bg-purple-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                <Target className="h-12 w-12 text-purple-600" />
+              <div className="w-24 h-24 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                <Users className="h-12 w-12 text-red-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
                 Cố Vấn
@@ -184,25 +189,25 @@ const About = () => {
         </section>
 
         {/* Vision */}
-        <section className="bg-gradient-to-r from-blue-600 to-purple-700 text-white rounded-lg p-12 text-center">
+        <section className="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg p-12 text-center">
           <h2 className="text-3xl font-bold mb-6">
             Tầm Nhìn Tương Lai
           </h2>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-red-100 max-w-3xl mx-auto mb-8">
             Chúng tôi đặt mục tiêu trở thành nhà xuất bản giáo dục hàng đầu Đông Nam Á, 
             ứng dụng công nghệ số để mang tri thức đến mọi người, mọi nơi.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <div className="flex items-center space-x-2">
-              <CheckCircle className="h-5 w-5 text-green-400" />
+              <CheckCircle className="h-5 w-5 text-red-200" />
               <span>Xuất bản số hóa</span>
             </div>
             <div className="flex items-center space-x-2">
-              <CheckCircle className="h-5 w-5 text-green-400" />
+              <CheckCircle className="h-5 w-5 text-red-200" />
               <span>Mở rộng thị trường quốc tế</span>
             </div>
             <div className="flex items-center space-x-2">
-              <CheckCircle className="h-5 w-5 text-green-400" />
+              <CheckCircle className="h-5 w-5 text-red-200" />
               <span>Phát triển bền vững</span>
             </div>
           </div>

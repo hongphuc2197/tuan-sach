@@ -11,6 +11,7 @@ import Books from './pages/Books';
 import BookDetail from './pages/BookDetail';
 
 import About from './pages/About';
+import History from './pages/History';
 import Contact from './pages/Contact';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -47,8 +48,9 @@ function App() {
                 </ProtectedRoute>
               } />
               
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
+                              <Route path="/about" element={<About />} />
+                <Route path="/history" element={<History />} />
+                <Route path="/contact" element={<Contact />} />
             </Routes>
           </main>
           <Footer />

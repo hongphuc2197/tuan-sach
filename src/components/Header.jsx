@@ -13,9 +13,25 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <BookOpen className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900">NXB Sư Phạm</span>
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="relative">
+              {/* Logo container với target và arrow */}
+              <div className="w-10 h-10 bg-white border-2 border-red-600 rounded-full flex items-center justify-center relative">
+                {/* Target (bullseye) */}
+                <div className="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center">
+                  <div className="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                {/* Arrow */}
+                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2">
+                  <div className="w-0.5 h-3 bg-amber-700"></div>
+                  <div className="w-0 h-0 border-l-2 border-r-2 border-b-3 border-l-transparent border-r-transparent border-b-red-600 transform -translate-x-1/2 ml-0.5"></div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-2xl font-bold text-red-600 tracking-wide">KYANON</span>
+              <span className="text-sm font-bold text-red-600 -mt-1">KF-Lab</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -29,6 +45,9 @@ const Header = () => {
 
             <Link to="/about" className="text-gray-700 hover:text-blue-600 transition-colors">
               Giới thiệu
+            </Link>
+            <Link to="/history" className="text-gray-700 hover:text-blue-600 transition-colors">
+              Lịch sử & Sứ mệnh
             </Link>
             <Link to="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">
               Liên hệ
@@ -105,6 +124,13 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Giới thiệu
+              </Link>
+              <Link
+                to="/history"
+                className="block px-3 py-2 text-gray-700 hover:text-blue-600"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Lịch sử & Sứ mệnh
               </Link>
               <Link
                 to="/contact"

@@ -17,12 +17,12 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-700 text-white py-20">
+      <section className="bg-gradient-to-r from-red-600 to-red-700 text-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Khám Phá Thế Giới Sách
           </h1>
-          <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 text-red-100 max-w-3xl mx-auto">
             NXB Đại Học Sư Phạm - Nơi ươm mầm tri thức, phát triển tài năng giáo dục Việt Nam
           </p>
                       <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -30,7 +30,7 @@ const Home = () => {
                 // Nếu đã đăng nhập, hiển thị nút xem sách
                 <Link
                   to="/books"
-                  className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors flex items-center justify-center space-x-2"
+                  className="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-red-50 transition-colors flex items-center justify-center space-x-2"
                 >
                   <span>Xem danh sách sách</span>
                   <ArrowRight className="h-5 w-5" />
@@ -40,14 +40,14 @@ const Home = () => {
                 <>
                   <Link
                     to="/login"
-                    className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors flex items-center justify-center space-x-2"
+                    className="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-red-50 transition-colors flex items-center justify-center space-x-2"
                   >
                     <span>Đăng nhập để xem sách</span>
                     <ArrowRight className="h-5 w-5" />
                   </Link>
                   <Link
                     to="/register"
-                    className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors"
+                    className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-red-600 transition-colors"
                   >
                     Đăng ký tài khoản
                   </Link>
@@ -62,29 +62,29 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="h-8 w-8 text-blue-600" />
+              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <BookOpen className="h-8 w-8 text-red-600" />
               </div>
               <h3 className="text-3xl font-bold text-gray-900 mb-2">500+</h3>
               <p className="text-gray-600">Đầu sách đa dạng</p>
             </div>
             <div className="text-center">
-              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-green-600" />
+              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8 text-red-600" />
               </div>
               <h3 className="text-3xl font-bold text-gray-900 mb-2">50K+</h3>
               <p className="text-gray-600">Độc giả tin tưởng</p>
             </div>
             <div className="text-center">
-              <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="h-8 w-8 text-purple-600" />
+              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="h-8 w-8 text-red-600" />
               </div>
               <h3 className="text-3xl font-bold text-gray-900 mb-2">25+</h3>
               <p className="text-gray-600">Năm kinh nghiệm</p>
             </div>
             <div className="text-center">
-              <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="h-8 w-8 text-yellow-600" />
+              <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Star className="h-8 w-8 text-red-600" />
               </div>
               <h3 className="text-3xl font-bold text-gray-900 mb-2">4.9/5</h3>
               <p className="text-gray-600">Đánh giá từ độc giả</p>
@@ -179,12 +179,12 @@ const Home = () => {
                 <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
-            <div className="relative">
+            {/* <div className="relative">
               <div className="bg-blue-600 w-full h-80 rounded-lg"></div>
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-700 rounded-lg flex items-center justify-center">
                 <BookOpen className="h-32 w-32 text-white opacity-20" />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

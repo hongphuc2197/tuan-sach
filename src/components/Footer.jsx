@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Mail, Phone, MapPin } from 'lucide-react';
+import { BookOpen, Mail, Phone, MapPin, Globe } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -24,7 +24,7 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <MapPin className="h-5 w-5 text-blue-400" />
                 <span className="text-gray-300 text-sm">
-                  280 An Dương Vương, Phường 4, Quận 5, TP.HCM
+                  B506 - 280 An Dương Vương, Phường Chợ Quán, TP.HCM
                 </span>
               </div>
               <div className="flex items-center space-x-3">
@@ -34,9 +34,32 @@ const Footer = () => {
                 </span>
               </div>
               <div className="flex items-center space-x-3">
+                <Globe className="h-5 w-5 text-blue-400" />
+                <a 
+                  href="https://kyanon.digital/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 text-sm hover:text-blue-400 transition-colors duration-200"
+                >
+                  kyanon.digital
+                </a>
+              </div>
+              <div className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-blue-400" />
                 <span className="text-gray-300 text-sm">
-                  info@nxbsp.edu.vn
+                  contact@kyanon.digital
+                </span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="h-5 w-5 text-blue-400" />
+                <span className="text-gray-300 text-sm">
+                  hai.tran@kyanon.digital
+                </span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="h-5 w-5 text-blue-400" />
+                <span className="text-gray-300 text-sm">
+                  trananhtuan526201@gmail.com
                 </span>
               </div>
             </div>
@@ -60,6 +83,14 @@ const Footer = () => {
                   className="text-gray-300 hover:text-white transition-colors text-sm"
                 >
                   Về chúng tôi
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/history"
+                  className="text-gray-300 hover:text-white transition-colors text-sm"
+                >
+                  Lịch sử & Sứ mệnh
                 </Link>
               </li>
 
